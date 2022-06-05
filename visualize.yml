@@ -1,0 +1,57 @@
+
+
+# Define the file metadata
+name: visualize
+version: 1.0.0
+kind: ecu
+
+# Define the files that are part of the package
+files:
+- visualize.py
+
+# Defines the file to call whenever a function is called
+entrypoint:
+  kind: task
+  exec: visualize.py
+
+# Define the dependencies (as Ubuntu packages)
+dependencies:
+- python3
+- python3-yaml
+- python3-pip
+
+install:
+  - pip3 install pillow
+
+# Define the actions
+actions:
+  visualise_sentiment:
+    command:
+      # This is just a list of arguments we pass to the function (i.e., sys.argv in Python)
+      args:
+      - vaccine
+    input:
+    # Define the input: a single string under the 'INPUT' environment variable
+    - name: input
+      type: string
+    - name: path
+      type: string
+    output:
+    # Define the output: a string, identifyable by the 'output' key
+    - name: output
+      type: string
+  visualise_timeseries:
+    command:
+      # This is just a list of arguments we pass to the function (i.e., sys.argv in Python)
+      args:
+      - vaccine
+    input:
+    # Define the input: a single string under the 'INPUT' environment variable
+    - name: input
+      type: string
+    - name: path
+      type: string
+    output:
+    # Define the output: a string, identifyable by the 'output' key
+    - name: output
+      type: string
